@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginForm from './companents/LoginForm';
+import Test from './companents/test';
+import MainLayout from './companents/MainLayout';
+import ProtectedRoute from './companents/ProtectedRoute';
+import AuthRedirect from './companents/AuthRedirect';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Login sayfası */}
+        <Route path="/login" element={<AuthRedirect><LoginForm /></AuthRedirect>} />
+        {/* Ana sayfa */}
+        <Route path="/dashboard" element={<ProtectedRoute><MainLayout content={<Test />} /></ProtectedRoute>} />
+      </Routes>
+    </Router>
   );
 }
 
